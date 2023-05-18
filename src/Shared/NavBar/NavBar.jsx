@@ -97,6 +97,9 @@ const NavBar = () => {
         <Link to="/login" className="btn sm:btn-xl btn-sm">
           Login
         </Link>
+        <Link to="/register" className="btn sm:btn-xl btn-sm">
+          Register
+        </Link>
       </div>
     </div>
   );
