@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "daisyui": "^2.51.6",
     "firebase": "^9.22.0",
     "latest-version": "^7.0.0",
