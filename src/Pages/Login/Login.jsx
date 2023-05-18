@@ -1,8 +1,12 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Login = () => {
-  const [show, setShow] = useState(true);
+  const navigate = useNavigate();
+  const { loginWithEmailPass } = useContext(AuthContext);
+  const [show, setShow] = useState(false);
   const handlePasswordShow = () => {
     setShow(!show);
   };
@@ -12,6 +16,20 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log({ email, password });
+    loginWithEmailPass(email, password)
+      .then((result) => {
+        if (result.user.email) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "User Created Successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+      })
+      .catch((err) => console.log(err.message));
   };
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">

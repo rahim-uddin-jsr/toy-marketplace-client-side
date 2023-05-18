@@ -1,19 +1,50 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Register = () => {
-  const [show, setShow] = useState(true);
+  const navigate = useNavigate();
+  const { registerWithEmailPassword, updateUserProfile } =
+    useContext(AuthContext);
+  const [show, setShow] = useState(false);
   const handlePasswordShow = () => {
     setShow(!show);
   };
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
-    const name = form.name.value;
+    const displayName = form.name.value;
     const email = form.email.value;
     const photoURL = form.photoUrl.value;
     const password = form.password.value;
-    console.log({ name, email, password, photoURL });
+    const userInfoForUpdate = { displayName, photoURL };
+    registerWithEmailPassword(email, password)
+      .then((result) => {
+        console.log(result);
+        if (result.user.email) {
+          updateUserProfile(userInfoForUpdate)
+            .then(() => {
+              // Profile updated!
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User Created Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            })
+            .catch((error) => {
+              alert(error.message);
+            });
+        }
+        form.reset();
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
   return (
     <>
@@ -189,7 +220,7 @@ const Register = () => {
               type="submit"
               className="block w-full rounded-lg btn-primary px-5 py-3 text-sm font-medium text-white"
             >
-              Sign in
+              Sign up
             </button>
 
             <p className="text-center text-sm text-gray-500">
