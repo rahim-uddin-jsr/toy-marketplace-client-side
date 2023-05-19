@@ -1,6 +1,11 @@
-import { Link, NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const NavBar = () => {
+  const { logOut, user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const navItems = (
     <>
       <li>
@@ -94,12 +99,52 @@ const NavBar = () => {
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link to="/login" className="btn sm:btn-xl btn-sm">
-          Login
-        </Link>
-        <Link to="/register" className="btn sm:btn-xl btn-sm">
-          Register
-        </Link>
+        {user ? (
+          <>
+            <div
+              className="dropdown dropdown-end tooltip tooltip-left"
+              data-tip="hello"
+            >
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-16 rounded-full">
+                  <img src={user?.photoURL} />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a className="justify-between">Profile</a>
+                </li>
+                <li
+                  onClick={() => {
+                    logOut()
+                      .then(() => {
+                        Swal.fire({
+                          position: "center",
+                          icon: "success",
+                          title: "Sign out success",
+                          showConfirmButton: false,
+                          timer: 1500,
+                        });
+                        navigate("/");
+                      })
+                      .catch((error) => {
+                        alert(error.massage);
+                      });
+                  }}
+                >
+                  <a>Logout</a>
+                </li>
+              </ul>
+            </div>
+          </>
+        ) : (
+          <Link to="/login" className="btn btn-primary btn-outline">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

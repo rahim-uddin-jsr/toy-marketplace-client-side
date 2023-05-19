@@ -1,11 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const emailRef = useRef();
   const navigate = useNavigate();
-  const { loginWithEmailPass } = useContext(AuthContext);
+  const { loginWithEmailPass, handlePasswordReset } = useContext(AuthContext);
   const [show, setShow] = useState(false);
   const handlePasswordShow = () => {
     setShow(!show);
@@ -22,7 +23,7 @@ const Login = () => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: "User Created Successfully",
+            title: "Login Successful!",
             showConfirmButton: false,
             timer: 1500,
           });
@@ -30,6 +31,37 @@ const Login = () => {
         }
       })
       .catch((err) => console.log(err.message));
+  };
+  const passwordReset = () => {
+    const email = emailRef.current.value;
+    if (!email) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Please enter your email first!",
+        footer: '<a href="">Why do I have this issue?</a>',
+      });
+      return;
+    }
+    handlePasswordReset(email)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Reset link send check your email!",
+          showConfirmButton: true,
+          timer: false,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="">Why do I have this issue?</a>',
+        });
+      });
   };
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
@@ -53,6 +85,7 @@ const Login = () => {
 
             <div className="relative">
               <input
+                ref={emailRef}
                 name="email"
                 required
                 type="email"
@@ -135,7 +168,12 @@ const Login = () => {
               </span>
             </div>
           </div>
-
+          <p className="text-center text-sm text-ellipsis">
+            Forgat password?
+            <span className="link ml-1" onClick={passwordReset}>
+              Reset
+            </span>
+          </p>
           <button
             type="submit"
             className="block w-full rounded-lg btn-primary px-5 py-3 text-sm font-medium text-white"
