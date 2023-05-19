@@ -1,4 +1,6 @@
 import { useContext, useRef, useState } from "react";
+import { FaGoogle } from "react-icons/fa";
+
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
@@ -6,12 +8,32 @@ import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 const Login = () => {
   const emailRef = useRef();
   const navigate = useNavigate();
-  const { loginWithEmailPass, handlePasswordReset } = useContext(AuthContext);
+  const { loginWithEmailPass, handlePasswordReset, googleSignIn } =
+    useContext(AuthContext);
   const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
   const handlePasswordShow = () => {
     setShow(!show);
   };
+  const handleGoogleSignIn = () => {
+    setError("");
+    googleSignIn()
+      .then((result) => {
+        if (result.user.email) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Login Successful!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+      })
+      .catch((err) => setError(err.message));
+  };
   const handleLogin = (e) => {
+    setError("");
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
@@ -30,7 +52,7 @@ const Login = () => {
           navigate("/");
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => setError(err.message));
   };
   const passwordReset = () => {
     const email = emailRef.current.value;
@@ -43,7 +65,8 @@ const Login = () => {
       });
       return;
     }
-    handlePasswordReset(email)
+    handlePasswordReset(email);
+    setError("")
       .then(() => {
         Swal.fire({
           position: "center",
@@ -54,7 +77,7 @@ const Login = () => {
         });
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.message);
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -77,7 +100,7 @@ const Login = () => {
           <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
             Feel out the from correctly for login.
           </p>
-
+          {error && <p className="text-red-500 font-bold">{error}</p>}
           <div>
             <label htmlFor="email" className="sr-only">
               Email
@@ -180,7 +203,17 @@ const Login = () => {
           >
             Sign in
           </button>
-
+          <div className="divider">OR</div>
+          <div className="grid card rounded-box place-items-center">
+            <button
+              onClick={handleGoogleSignIn}
+              type="button"
+              className=" w-full flex gap-3 rounded-lg btn px-5 py-3 text-sm font-medium text-white"
+            >
+              <FaGoogle color="white" />
+              Google Sign in
+            </button>
+          </div>
           <p className="text-center text-sm text-gray-500">
             Do not have account?
             <Link to="/register" className="link ml-1" href="">

@@ -8,11 +8,13 @@ const Register = () => {
   const { registerWithEmailPassword, updateUserProfile } =
     useContext(AuthContext);
   const [show, setShow] = useState(false);
+  const [error, setError] = useState("");
   const handlePasswordShow = () => {
     setShow(!show);
   };
 
   const handleRegister = (e) => {
+    setError("");
     e.preventDefault();
     const form = e.target;
     const displayName = form.name.value;
@@ -20,6 +22,10 @@ const Register = () => {
     const photoURL = form.photoUrl.value;
     const password = form.password.value;
     const userInfoForUpdate = { displayName, photoURL };
+    if (password.length < 6) {
+      setError("Password must have to 6 or more character");
+      return;
+    }
     registerWithEmailPassword(email, password)
       .then((result) => {
         console.log(result);
@@ -37,13 +43,13 @@ const Register = () => {
               navigate("/");
             })
             .catch((error) => {
-              alert(error.message);
+              setError(error.message);
             });
         }
         form.reset();
       })
       .catch((err) => {
-        console.log(err.message);
+        setError(err.message);
       });
   };
   return (
@@ -61,7 +67,7 @@ const Register = () => {
             <p className="mx-auto mt-4 max-w-md text-center text-gray-500">
               Feel out the from correctly for registration.
             </p>
-
+            {error && <p className="text-red-500 font-bold">{error}</p>}
             <div>
               <label htmlFor="email" className="sr-only">
                 Full Name

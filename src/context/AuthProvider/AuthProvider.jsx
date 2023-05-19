@@ -1,9 +1,11 @@
 import {
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   onAuthStateChanged,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -12,6 +14,7 @@ import { app } from "../../firebase/firebase.config";
 export const AuthContext = createContext();
 // eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
+  const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
   const auth = getAuth(app);
 
@@ -23,6 +26,9 @@ const AuthProvider = ({ children }) => {
   };
   const loginWithEmailPass = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
+  };
+  const googleSignIn = () => {
+    return signInWithPopup(auth, googleProvider);
   };
   const handlePasswordReset = (email) => {
     return sendPasswordResetEmail(auth, email);
@@ -43,6 +49,7 @@ const AuthProvider = ({ children }) => {
     registerWithEmailPassword,
     updateUserProfile,
     loginWithEmailPass,
+    googleSignIn,
     handlePasswordReset,
     logOut,
     user,

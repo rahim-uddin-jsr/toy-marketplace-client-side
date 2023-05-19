@@ -103,7 +103,7 @@ const NavBar = () => {
           <>
             <div
               className="dropdown dropdown-end tooltip tooltip-left"
-              data-tip="hello"
+              data-tip={user?.displayName}
             >
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-16 rounded-full">
