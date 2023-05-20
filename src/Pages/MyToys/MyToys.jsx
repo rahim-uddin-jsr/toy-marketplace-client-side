@@ -10,6 +10,42 @@ const MyToys = () => {
   const [toys, setToys] = useState([]);
   const descriptionRef = useRef();
   const [editedItem, setEditedItem] = useState("");
+  const [sortAccenting, setSortAccenting] = useState("");
+  const [query, setQuery] = useState("");
+
+  const acceding = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M12 19.5v-15m0 0l-6.75 6.75M12 4.5l6.75 6.75"
+      />
+    </svg>
+  );
+  const descending = (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3"
+      />
+    </svg>
+  );
+  const [sortIcon, setSortIcon] = useState(acceding);
   const {
     sellerName,
     email,
@@ -23,10 +59,10 @@ const MyToys = () => {
     _id,
   } = editedItem;
   useEffect(() => {
-    fetch(`http://localhost:5000/toys/${user?.email}`)
+    fetch(`http://localhost:5000/toys/${user?.email}?sort=${query}`)
       .then((res) => res.json())
       .then((data) => setToys(data));
-  }, [user, isUpdated]);
+  }, [user, isUpdated, query]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -116,6 +152,18 @@ const MyToys = () => {
           });
       }
     });
+  };
+
+  const handleSort = () => {
+    setIsUpdated(true);
+    setSortAccenting(!sortAccenting);
+    if (sortAccenting) {
+      setQuery("ascending");
+      setSortIcon(acceding);
+    } else {
+      setQuery("descending");
+      setSortIcon(descending);
+    }
   };
   return (
     <div>
@@ -279,7 +327,9 @@ const MyToys = () => {
               <th>Toy Name</th>
               <th>Toy Picture</th>
               <th>Sub-category</th>
-              <th>Price</th>
+              <th className="flex justify-center items-center">
+                Price <button onClick={handleSort}>{sortIcon}</button>
+              </th>
               <th>Available Quantity</th>
               <th>Update</th>
               <th>Delete</th>
