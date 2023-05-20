@@ -1,33 +1,6 @@
 import React from "react";
-import Swal from "sweetalert2";
 
-const MyToyRow = ({ toy }) => {
-  const handleDelete = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/toys/${id}`, {
-          method: "DELETE",
-          headers: {
-            "content-type": "application/json",
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount === 1) {
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            }
-          });
-      }
-    });
-  };
+const MyToyRow = ({ toy, handleDelete }) => {
   return (
     <>
       <tr className="text-center">
