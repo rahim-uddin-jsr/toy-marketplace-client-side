@@ -4,8 +4,11 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
+  useTitle("Sign In");
+
   const emailRef = useRef();
   const navigate = useNavigate();
   const { loginWithEmailPass, handlePasswordReset, googleSignIn } =

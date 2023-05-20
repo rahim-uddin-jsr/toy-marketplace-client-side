@@ -1,10 +1,8 @@
+import useTitle from "../../hooks/useTitle";
 
 const Blogs = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+  useTitle("Blogs");
+  return <div></div>;
 };
 
 export default Blogs;

@@ -1,6 +1,7 @@
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import useTitle from "../../../hooks/useTitle";
 import CategoryTabs from "../CategoryTabs/CategoryTabs";
 import Gallery from "../Gallery/Gallery";
 import SubscribeNewsletter from "../SubscribeNewsletter/SubscribeNewsletter";
@@ -10,6 +11,8 @@ const Home = () => {
   useEffect(() => {
     Aos.init({ duration: 2000 });
   }, []);
+  useTitle("Home");
+
   return (
     <div>
       <div

@@ -2,8 +2,11 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 
 const Register = () => {
+  useTitle("Sign Up");
+
   const navigate = useNavigate();
   const { registerWithEmailPassword, updateUserProfile } =
     useContext(AuthContext);

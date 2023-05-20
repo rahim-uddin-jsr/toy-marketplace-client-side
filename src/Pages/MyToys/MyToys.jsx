@@ -1,6 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import useTitle from "../../hooks/useTitle";
+
 import MyToyRow from "./MyToyRow";
 
 const MyToys = () => {
@@ -12,6 +14,8 @@ const MyToys = () => {
   const [editedItem, setEditedItem] = useState("");
   const [sortAccenting, setSortAccenting] = useState("");
   const [query, setQuery] = useState("");
+
+  useTitle("My Toys");
 
   const acceding = (
     <svg

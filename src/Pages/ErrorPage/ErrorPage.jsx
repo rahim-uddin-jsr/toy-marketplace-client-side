@@ -1,8 +1,11 @@
 import { Link, useRouteError } from "react-router-dom";
 import errorImg from "../../assets/error.svg";
+import useTitle from "../../hooks/useTitle";
 const ErrorPage = () => {
   const error = useRouteError();
   console.log(error);
+  useTitle("Error Happened");
+
   return (
     <div className="flex flex-col justify-center items-center mt-32 px-5">
       <img className="object-fill w-4/12 mb-4" src={errorImg} alt="" />
