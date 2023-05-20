@@ -16,6 +16,8 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const googleProvider = new GoogleAuthProvider();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const auth = getAuth(app);
 
   const registerWithEmailPassword = (email, password) => {
@@ -41,6 +43,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log(currentUser);
       setUser(currentUser);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, [auth]);
@@ -52,6 +55,7 @@ const AuthProvider = ({ children }) => {
     googleSignIn,
     handlePasswordReset,
     logOut,
+    loading,
     user,
   };
   return (
