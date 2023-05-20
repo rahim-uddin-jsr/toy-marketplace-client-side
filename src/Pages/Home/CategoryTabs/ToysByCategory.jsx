@@ -12,7 +12,7 @@ const ToysByCategory = ({ categoryName }) => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
       {toys?.map((toy) => (
-        <div key={toy._id} className="card w-96 bg-base-100 shadow-xl">
+        <div key={toy._id} className="card md:w-96 bg-base-100 shadow-xl">
           <figure className="p-8">
             <img
               className=" w-[280px] h-[350px]"
