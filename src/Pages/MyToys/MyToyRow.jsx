@@ -1,6 +1,6 @@
 import React from "react";
 
-const MyToyRow = ({ toy, handleDelete }) => {
+const MyToyRow = ({ toy, handleDelete, handleModal }) => {
   return (
     <>
       <tr className="text-center">
@@ -24,9 +24,11 @@ const MyToyRow = ({ toy, handleDelete }) => {
         <td>
           <div className="font-bold">{toy.quantity}</div>
         </td>
-
         <td>
-          <button className="btn btn-sm btn-circle btn-ghost">
+          <button
+            onClick={() => handleModal(toy._id)}
+            className="btn btn-sm btn-circle btn-ghost"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
