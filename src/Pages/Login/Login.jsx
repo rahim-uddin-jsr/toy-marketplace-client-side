@@ -1,7 +1,7 @@
 import { useContext, useRef, useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 
@@ -12,6 +12,9 @@ const Login = () => {
     useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  console.log(from);
   const handlePasswordShow = () => {
     setShow(!show);
   };
@@ -20,6 +23,7 @@ const Login = () => {
     googleSignIn()
       .then((result) => {
         if (result.user.email) {
+          navigate(from, { replace: true });
           Swal.fire({
             position: "center",
             icon: "success",
@@ -27,7 +31,6 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/");
         }
       })
       .catch((err) => setError(err.message));
@@ -42,6 +45,7 @@ const Login = () => {
     loginWithEmailPass(email, password)
       .then((result) => {
         if (result.user.email) {
+          navigate(from, { replace: true });
           Swal.fire({
             position: "center",
             icon: "success",
@@ -49,7 +53,6 @@ const Login = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate("/");
         }
       })
       .catch((err) => setError(err.message));

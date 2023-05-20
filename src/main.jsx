@@ -1,5 +1,5 @@
-import React from "react";
 import "@smastrom/react-rating/style.css";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider/AuthProvider";
@@ -15,6 +15,7 @@ import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login";
 import MyToys from "./Pages/MyToys/MyToys";
 import Register from "./Pages/Register/Register";
+import PrivateRout from "./PrivateRout/PrivateRout";
 
 const router = createBrowserRouter([
   {
@@ -26,16 +27,33 @@ const router = createBrowserRouter([
       {
         path: "/all-toys",
         element: <AllToys />,
-        loader: () =>
-          fetch("http://localhost:5000/toys"),
+        loader: () => fetch("http://localhost:5000/toys"),
       },
       {
         path: "toy/:id",
-        element: <ToyDetails />,
+        element: (
+          <PrivateRout>
+            <ToyDetails />
+          </PrivateRout>
+        ),
         loader: ({ params }) => fetch(`http://localhost:5000/toy/${params.id}`),
       },
-      { path: "/add-toys", element: <AddToys /> },
-      { path: "/my-toys", element: <MyToys /> },
+      {
+        path: "/add-toys",
+        element: (
+          <PrivateRout>
+            <AddToys />
+          </PrivateRout>
+        ),
+      },
+      {
+        path: "/my-toys",
+        element: (
+          <PrivateRout>
+            <MyToys />
+          </PrivateRout>
+        ),
+      },
       { path: "/blogs", element: <Blogs /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
