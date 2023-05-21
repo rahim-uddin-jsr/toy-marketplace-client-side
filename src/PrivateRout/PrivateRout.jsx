@@ -6,7 +6,6 @@ import { AuthContext } from "../context/AuthProvider/AuthProvider";
 const PrivateRout = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   const location = useLocation();
-  console.log(location);
   if (!user) {
     Swal.fire({
       position: "center",

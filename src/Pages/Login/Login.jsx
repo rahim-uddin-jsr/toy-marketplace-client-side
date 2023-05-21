@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
+import ScrollToTop from "../../hooks/ScrollToTop";
 import useTitle from "../../hooks/useTitle";
 
 const Login = () => {
@@ -17,7 +18,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
-  
+
   const handlePasswordShow = () => {
     setShow(!show);
   };
@@ -93,6 +94,7 @@ const Login = () => {
   };
   return (
     <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+      <ScrollToTop />
       <div className="mx-auto max-w-lg">
         <h1 className="text-center text-2xl font-bold text-primary sm:text-3xl">
           Please Login
