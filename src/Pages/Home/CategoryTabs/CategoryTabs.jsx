@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import HashLoader from "react-spinners/HashLoader";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import Swal from "sweetalert2";
 import ToysByCategory from "./ToysByCategory";
 const CategoryTabs = () => {
   const [toys, setToys] = useState([]);
@@ -18,7 +19,8 @@ const CategoryTabs = () => {
           }
         });
         setSubCategory(newSubCategories);
-      });
+      })
+      
   }, []);
   if (toys.length == 0) {
     return (

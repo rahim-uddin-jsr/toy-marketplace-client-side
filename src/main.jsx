@@ -27,7 +27,6 @@ const router = createBrowserRouter([
       {
         path: "/all-toys",
         element: <AllToys />,
-        // loader: () => fetch("https://kiddo-zone-1.vercel.app/toys"),
       },
       {
         path: "toy/:id",

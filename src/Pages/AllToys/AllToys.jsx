@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import Swal from "sweetalert2";
 import useTitle from "../../hooks/useTitle";
 import ToyRow from "./ToyRow";
 
@@ -14,7 +15,16 @@ const AllToys = () => {
   useEffect(() => {
     fetch(`https://kiddo-zone-1.vercel.app/toys?search=${searchTex}`)
       .then((res) => res.json())
-      .then((data) => setToys(data));
+      .then((data) => setToys(data))
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something went wrong try again later",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   }, [searchTex]);
   const handleSearch = (e) => {
     e.preventDefault();

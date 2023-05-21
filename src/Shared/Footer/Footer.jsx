@@ -38,6 +38,11 @@ const Footer = () => {
             Kiddo Zone. <br />
             Providing reliable service since 2020
           </p>
+          <p>
+            Ring Road ,Tokeyo Square,Kids Zone,Shop#509,Mohammadpur Dhaka ,
+            Dhaka Division Bangladesh
+          </p>
+          <p>Phone 01732675717.</p>
         </div>
         <div className="md:place-self-center  md:justify-self-center justify-items-center gap-4">
           <div className="grid grid-flow-col gap-4 ">

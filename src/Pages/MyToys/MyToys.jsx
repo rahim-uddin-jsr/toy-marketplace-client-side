@@ -66,7 +66,16 @@ const MyToys = () => {
   useEffect(() => {
     fetch(`https://kiddo-zone-1.vercel.app/toys/${user?.email}?sort=${query}`)
       .then((res) => res.json())
-      .then((data) => setToys(data));
+      .then((data) => setToys(data))
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something went wrong try again later",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
   }, [user, isUpdated, query]);
 
   const handleDelete = (id) => {
@@ -93,6 +102,15 @@ const MyToys = () => {
               setToys(unmodified);
               Swal.fire("Deleted!", "Your file has been deleted.", "success");
             }
+          })
+          .catch((err) => {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Something went wrong try again later",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
       }
     });
@@ -153,6 +171,15 @@ const MyToys = () => {
               Swal.fire("Updated!", "Your file has been edited.", "success");
               setShowModal(false);
             }
+          })
+          .catch((err) => {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Something went wrong try again later",
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
       }
     });

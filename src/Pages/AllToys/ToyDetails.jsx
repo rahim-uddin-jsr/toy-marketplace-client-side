@@ -2,7 +2,6 @@ import { Rating } from "@smastrom/react-rating";
 import React from "react";
 import ReactImageMagnify from "react-image-magnify";
 import { useLoaderData } from "react-router-dom";
-// picture, toy name, seller name, seller email, price, rating, available quantity, and detail description
 const ToyDetails = () => {
   const toyDetails = useLoaderData();
   const {

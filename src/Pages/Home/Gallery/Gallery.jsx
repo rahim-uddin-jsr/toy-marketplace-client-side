@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import HashLoader from "react-spinners/HashLoader";
+import Swal from "sweetalert2";
 import GalleryImg from "./GalleryImg";
 const Gallery = () => {
   const [toys, setToys] = useState([]);
@@ -9,6 +10,15 @@ const Gallery = () => {
       .then((res) => res.json())
       .then((data) => {
         setToys(data.map((element) => element.photoURL));
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something went wrong try again later",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   }, []);
   if (toys?.length == 0) {

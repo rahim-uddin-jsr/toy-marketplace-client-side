@@ -65,6 +65,15 @@ const AddToys = () => {
             timer: 1500,
           });
         }
+      })
+      .catch((err) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Something went wrong try again later",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   };
   return (

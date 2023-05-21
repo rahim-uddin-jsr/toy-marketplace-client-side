@@ -12,6 +12,7 @@ const Register = () => {
     useContext(AuthContext);
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
+  // handle password type
   const handlePasswordShow = () => {
     setShow(!show);
   };
@@ -70,6 +71,7 @@ const Register = () => {
               Feel out the from correctly for registration.
             </p>
             {error && <p className="text-red-500 font-bold">{error}</p>}
+            {/* Full Name input filed */}
             <div>
               <label htmlFor="email" className="sr-only">
                 Full Name
@@ -102,6 +104,41 @@ const Register = () => {
                 </span>
               </div>
             </div>
+
+            {/* Photo url input filed */}
+            <div>
+              <label htmlFor="photoUrl" className="sr-only">
+                Photo
+              </label>
+
+              <div className="relative">
+                <input
+                  name="photoUrl"
+                  required
+                  type="url"
+                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                  placeholder="Enter Photo URL"
+                />
+
+                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+            {/* Email input filed */}
             <div>
               <label htmlFor="email" className="sr-only">
                 Email
@@ -133,39 +170,7 @@ const Register = () => {
                 </span>
               </div>
             </div>
-            <div>
-              <label htmlFor="email" className="sr-only">
-                Photo
-              </label>
-
-              <div className="relative">
-                <input
-                  name="photoUrl"
-                  required
-                  type="url"
-                  className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-                  placeholder="Enter Photo URL"
-                />
-
-                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
-
+            {/* password input filed */}
             <div>
               <label htmlFor="password" className="sr-only">
                 Password
@@ -233,7 +238,7 @@ const Register = () => {
 
             <p className="text-center text-sm text-gray-500">
               Already have an account?
-              <Link to="/login" className="link ml-1" href="">
+              <Link to="/login" className="link ml-1">
                 Login
               </Link>
             </p>

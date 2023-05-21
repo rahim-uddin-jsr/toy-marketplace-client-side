@@ -7,7 +7,8 @@ const ToysByCategory = ({ categoryName }) => {
   useEffect(() => {
     fetch(`https://kiddo-zone-1.vercel.app/toys?category=${categoryName}`)
       .then((res) => res.json())
-      .then((data) => setToys(data));
+      .then((data) => setToys(data))
+      .catch((err) => {});
   }, []);
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 my-8">
