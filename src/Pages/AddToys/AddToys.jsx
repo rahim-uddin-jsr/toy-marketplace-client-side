@@ -1,9 +1,13 @@
-import { useContext, useRef } from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useContext, useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
-
 const AddToys = () => {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   useTitle("Add Toys");
 
   const descriptionRef = useRef();
@@ -66,7 +70,7 @@ const AddToys = () => {
   return (
     <div>
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-xl">
+        <div className="mx-auto max-w-xl" data-aos="zoom-in-right">
           <h1 className="text-center text-2xl font-bold text-primary sm:text-3xl">
             Add New Toy!
           </h1>

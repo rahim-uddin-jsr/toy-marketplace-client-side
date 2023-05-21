@@ -1,10 +1,14 @@
-import React from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-
 const ToyRow = ({ toy }) => {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   const { sellerName, productName, subCategory, price, quantity, _id } = toy;
   return (
-    <tr className="text-center">
+    <tr className="text-center" data-aos="zoom-in-right">
       <td>
         <div className="font-bold">{sellerName}</div>
       </td>

@@ -1,9 +1,13 @@
-import React from "react";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
+import React, { useEffect } from "react";
 const MyToyRow = ({ toy, handleDelete, handleModal }) => {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   return (
     <>
-      <tr className="text-center">
+      <tr className="text-center" data-aos="zoom-in-right">
         <td>
           <div className="font-bold">{toy.sellerName}</div>
         </td>

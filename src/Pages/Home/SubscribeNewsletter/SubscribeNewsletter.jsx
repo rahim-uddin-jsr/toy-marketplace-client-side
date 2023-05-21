@@ -1,8 +1,12 @@
-import React from "react";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
+import React, { useEffect } from "react";
 const SubscribeNewsletter = () => {
+  useEffect(() => {
+    Aos.init({ duration: 1000 });
+  }, []);
   return (
-    <section className="bg-gray-50">
+    <section data-aos="zoom-in-left" className="bg-gray-50">
       <div className="p-8 md:p-12 lg:px-16 lg:py-24">
         <div className="mx-auto max-w-lg text-center">
           <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
@@ -16,7 +20,7 @@ const SubscribeNewsletter = () => {
         </div>
 
         <div className="mx-auto mt-8 max-w-xl">
-          <form action="#" className="sm:flex sm:gap-4">
+          <form action="#" className="sm:flex sm:gap-4 " data-aos="flip-right">
             <div className="sm:flex-1">
               <label htmlFor="email" className="sr-only">
                 Email
