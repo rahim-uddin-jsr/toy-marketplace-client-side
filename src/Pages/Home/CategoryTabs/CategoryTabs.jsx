@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import HashLoader from "react-spinners/HashLoader";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import ToysByCategory from "./ToysByCategory";
@@ -6,20 +7,26 @@ const CategoryTabs = () => {
   const [toys, setToys] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   useEffect(() => {
-    const categories = [];
-    fetch(`http://localhost:5000/toys`)
+    const newSubCategories = [];
+    fetch(`https://kiddo-zone-1.vercel.app/toys`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
         data.forEach((toy) => {
-          if (!categories.includes(toy.subCategory)) {
-            categories.push(toy.subCategory);
+          if (!newSubCategories.includes(toy.subCategory)) {
+            newSubCategories.push(toy.subCategory);
           }
         });
-        setSubCategory(categories);
+        setSubCategory(newSubCategories);
       });
   }, []);
-
+  if (toys.length == 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <HashLoader color="#36d7b7" />
+      </div>
+    );
+  }
   return (
     <div className="space-y-10 my-10">
       <h2 className="mb-6 font-sans text-3xl md:text-6xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const ToysByCategory = ({ categoryName }) => {
   const [toys, setToys] = useState();
   useEffect(() => {
-    fetch(`http://localhost:5000/toys?category=${categoryName}`)
+    fetch(`https://kiddo-zone-1.vercel.app/toys?category=${categoryName}`)
       .then((res) => res.json())
       .then((data) => setToys(data));
   }, []);

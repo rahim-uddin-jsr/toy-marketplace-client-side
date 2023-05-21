@@ -3,7 +3,6 @@ import errorImg from "../../assets/error.svg";
 import useTitle from "../../hooks/useTitle";
 const ErrorPage = () => {
   const error = useRouteError();
-  console.log(error);
   useTitle("Error Happened");
 
   return (

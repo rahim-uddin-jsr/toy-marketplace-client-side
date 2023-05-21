@@ -17,7 +17,6 @@ const Login = () => {
   const [error, setError] = useState("");
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
-  console.log(from);
   const handlePasswordShow = () => {
     setShow(!show);
   };
@@ -44,7 +43,6 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log({ email, password });
     loginWithEmailPass(email, password)
       .then((result) => {
         if (result.user.email) {

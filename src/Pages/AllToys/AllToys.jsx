@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import { HashLoader } from "react-spinners";
 import useTitle from "../../hooks/useTitle";
 import ToyRow from "./ToyRow";
 
@@ -11,7 +12,7 @@ const AllToys = () => {
   const [searchTex, setSearchText] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/toys?search=${searchTex}`)
+    fetch(`https://kiddo-zone-1.vercel.app/toys?search=${searchTex}`)
       .then((res) => res.json())
       .then((data) => setToys(data));
   }, [searchTex]);
@@ -19,6 +20,13 @@ const AllToys = () => {
     e.preventDefault();
     setSearchText(e.target.searchTextElement.value);
   };
+  if (toys.length == 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <HashLoader color="#36d7b7" />
+      </div>
+    );
+  }
   return (
     <div>
       <div className="form-control my-10">

@@ -38,7 +38,7 @@ const AddToys = () => {
       rating,
       price,
     };
-    fetch("http://localhost:5000/toys", {
+    fetch("https://kiddo-zone-1.vercel.app/toys", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -123,14 +123,14 @@ const AddToys = () => {
                   <select
                     name="subCategory"
                     className="select w-full max-w-xs"
-                    defaultValue={1}
+                    defaultValue={"Select Sub category"}
                   >
-                    <option disabled value={1}>
+                    <option disabled defaultValue={"Select Sub category"}>
                       Select Sub category
                     </option>
-                    <option value={2}>Teddy Bear</option>
-                    <option value={3}>Unicorn</option>
-                    <option value={4}>Dinosaur</option>
+                    <option defaultValue={"Teddy Bear"}>Teddy Bear</option>
+                    <option defaultValue={"Unicorn"}>Unicorn</option>
+                    <option defaultValue={"Dinosaur"}>Dinosaur</option>
                   </select>
                 </div>
               </div>

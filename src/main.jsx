@@ -27,7 +27,7 @@ const router = createBrowserRouter([
       {
         path: "/all-toys",
         element: <AllToys />,
-        // loader: () => fetch("http://localhost:5000/toys"),
+        // loader: () => fetch("https://kiddo-zone-1.vercel.app/toys"),
       },
       {
         path: "toy/:id",
@@ -36,7 +36,8 @@ const router = createBrowserRouter([
             <ToyDetails />
           </PrivateRout>
         ),
-        loader: ({ params }) => fetch(`http://localhost:5000/toy/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`https://kiddo-zone-1.vercel.app/toy/${params.id}`),
       },
       {
         path: "/add-toys",

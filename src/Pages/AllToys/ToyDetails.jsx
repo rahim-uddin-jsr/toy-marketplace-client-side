@@ -15,7 +15,6 @@ const ToyDetails = () => {
     price,
     email,
   } = toyDetails;
-  // console.log(toy);
 
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl my-10 p-10">

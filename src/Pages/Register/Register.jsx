@@ -31,7 +31,6 @@ const Register = () => {
     }
     registerWithEmailPassword(email, password)
       .then((result) => {
-        console.log(result);
         if (result.user.email) {
           updateUserProfile(userInfoForUpdate)
             .then(() => {
@@ -43,7 +42,7 @@ const Register = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
-              // navigate("/");
+              navigate("/");
             })
             .catch((error) => {
               setError(error.message);

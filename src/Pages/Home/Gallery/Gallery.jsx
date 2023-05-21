@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
+import HashLoader from "react-spinners/HashLoader";
 import GalleryImg from "./GalleryImg";
-
 const Gallery = () => {
-  const [toys, setToys] = useState();
-  
+  const [toys, setToys] = useState([]);
+
   useEffect(() => {
-    fetch(`http://localhost:5000/toys`)
+    fetch(`https://kiddo-zone-1.vercel.app/toys`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data.map((element) => element.photoURL));
       });
   }, []);
-  console.log(toys);
+  if (toys?.length == 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <HashLoader color="#36d7b7" />
+      </div>
+    );
+  }
   return (
     <div className="mt-8">
       <h2 className="mb-6 font-sans text-3xl md:text-6xl text-center font-bold tracking-tight text-gray-900 sm:text-4xl sm:leading-none">

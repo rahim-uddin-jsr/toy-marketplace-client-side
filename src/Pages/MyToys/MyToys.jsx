@@ -1,4 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
+import HashLoader from "react-spinners/HashLoader";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../context/AuthProvider/AuthProvider";
 import useTitle from "../../hooks/useTitle";
@@ -63,7 +64,7 @@ const MyToys = () => {
     _id,
   } = editedItem;
   useEffect(() => {
-    fetch(`http://localhost:5000/toys/${user?.email}?sort=${query}`)
+    fetch(`https://kiddo-zone-1.vercel.app/toys/${user?.email}?sort=${query}`)
       .then((res) => res.json())
       .then((data) => setToys(data));
   }, [user, isUpdated, query]);
@@ -79,7 +80,7 @@ const MyToys = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/toys/${id}`, {
+        fetch(`https://kiddo-zone-1.vercel.app/toys/${id}`, {
           method: "DELETE",
           headers: {
             "content-type": "application/json",
@@ -138,7 +139,7 @@ const MyToys = () => {
       confirmButtonText: "Yes, Update it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch("http://localhost:5000/toys", {
+        fetch("https://kiddo-zone-1.vercel.app/toys", {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
@@ -147,7 +148,6 @@ const MyToys = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             if (data.modifiedCount > 0) {
               setIsUpdated(true);
               Swal.fire("Updated!", "Your file has been edited.", "success");
@@ -169,6 +169,13 @@ const MyToys = () => {
       setSortIcon(descending);
     }
   };
+  if (toys.length == 0) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <HashLoader color="#36d7b7" />
+      </div>
+    );
+  }
   return (
     <div>
       {/* Modal for update toys data  */}
