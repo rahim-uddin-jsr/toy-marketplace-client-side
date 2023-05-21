@@ -1,8 +1,7 @@
-**
 
 ## Project Name:  Kiddo Zone
 **Site Live Link: [Link-1](https://kiddo-zone-b9a3f.web.app/) [Link-2](https://kiddo-zone.netlify.app/)** 
-**
+
 
 
 **About this Project**
