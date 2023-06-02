@@ -1,8 +1,12 @@
 
+
+
 ## Project Name:  Kiddo Zone
 **Site Live Link: [Link-1](https://kiddo-zone-b9a3f.web.app/) [Link-2](https://kiddo-zone.netlify.app/)** 
+
 **Server Site Code Link: [Link](https://github.com/rahim-uddin-jsr/toy-marketplace-server-side)** 
-**If the site have any essue to fetch data from server please reload the server for 5/6 time**
+
+**If the site have any Issue to fetch data from server please reload the server for 5/6 time**
 
 **About this Project**
 This project was simple ecommerce website. In this website we focus Toy related Products. This project was done by me after a good practice of Express Mongo CRUD System.
